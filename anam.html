@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alles Liebe zum Geburtstag, Mama!</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f9f0ff, #fff0f5);
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 30px;
+      }
+
+      header {
+        text-align: center;
+        padding: 30px 0;
+        background: linear-gradient(90deg, #ff9ec0, #ff6b9d);
+        margin: -30px -30px 30px -30px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease-out 0.3s forwards;
+      }
+
+      .photo-section {
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      .main-photo {
+        width: 100%;
+        max-width: 500px;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 5px solid white;
+        display: block;
+        margin: 0 auto 30px;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: fadeInScale 1s ease-out 0.6s forwards;
+      }
+
+      .message-box {
+        background: #fff9fc;
+        border-left: 5px solid #ff6b9d;
+        padding: 25px;
+        margin: 25px 0;
+        border-radius: 0 10px 10px 0;
+        opacity: 0;
+        transform: translateX(-20px);
+        animation: fadeInRight 1s ease-out 0.9s forwards;
+      }
+
+      h2 {
+        color: #ff6b9d;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 1.2s forwards;
+      }
+
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .memory-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .memory-card:nth-child(1) {
+        animation: fadeInUp 0.8s ease-out 1.5s forwards;
+      }
+      .memory-card:nth-child(2) {
+        animation: fadeInUp 0.8s ease-out 1.7s forwards;
+      }
+      .memory-card:nth-child(3) {
+        animation: fadeInUp 0.8s ease-out 1.9s forwards;
+      }
+      .memory-card:nth-child(4) {
+        animation: fadeInUp 0.8s ease-out 2.1s forwards;
+      }
+
+      .memory-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(255, 107, 157, 0.2);
+      }
+
+      .memory-card h3 {
+        color: #ff6b9d;
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+
+      .heart {
+        color: #ff6b9d;
+        font-size: 1.5rem;
+        margin: 0 5px;
+        display: inline-block;
+        animation: heartbeat 1.5s infinite;
+      }
+
+      .emoji-animation {
+        font-size: 2rem;
+        display: inline-block;
+        margin: 0 5px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .emoji-animation:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .emoji-animation:nth-child(3) {
+        animation-delay: 1s;
+      }
+      .emoji-animation:nth-child(4) {
+        animation-delay: 1.5s;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 2px dashed #ff9ec0;
+        color: #666;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 2.4s forwards;
+      }
+
+      .special-emojis {
+        text-align: center;
+        margin: 30px 0;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 2.2s forwards;
+      }
+
+      /* Animationen */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInScale {
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(5deg);
+        }
+      }
+
+      /* Für Handys optimiert */
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+          margin: 10px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        header {
+          padding: 20px 0;
+          margin: -15px -15px 20px -15px;
+        }
+
+        .main-photo {
+          height: 250px;
+        }
+      }
+
+      /* Platzhalter für fehlendes Foto */
+      .photo-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff9ec0, #ff6b9d);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>
+          Ad günün mubarek olsun gözel Anam! <span class="heart">❤️</span>
+        </h1>
+        <p class="subtitle"></p>
+        <div class="special-emojis">
+          <span class="emoji-animation">🎂</span>
+          <span class="emoji-animation">🎉</span>
+          <span class="emoji-animation">🥳</span>
+          <span class="emoji-animation">🎁</span>
+        </div>
+      </header>
+
+      <div class="photo-section">
+        <!-- FOTO - EINFACH DEN DATEINAMEN ÄNDERN -->
+        <img
+          class="main-photo"
+          id="birthdayPhoto"
+          src="mama-foto.jpeg"
+          alt="Unser schönstes Foto zusammen"
+          onerror="
+            this.onerror = null;
+            this.src = '';
+            this.outerHTML =
+              '<div class=\'main-photo\'><div class=\'photo-placeholder\'>💖 Ein Foto von uns kommt hier hin! 💖<br><small>(Speichere es als \'mama-foto.jpg\' im gleichen Ordner)</small></div></div>';
+          "
+        />
+      </div>
+
+      <div class="message-box">
+        <h2>Canim Anam,</h2>
+        <!-- HIER DEINEN PERSÖNLICHEN TEXT SCHREIBEN -->
+        <p id="personalMessage">
+          Bu gün bizim ailemiz ücün cox önemli bir gündü, cünkü bu gün senin
+          dogum günündür. Anam men sene her seye göre tesekkur edirem ve en
+          önemlisi her gün gösterdiyin cabaya ve sebire göre seninle cox qurur
+          duyuram ve deyiremki allah yaxsiki seni menim anam eleyib. Ishallah
+          bütün arzulariva catasan ve hemise xosbext olasan.
+          <span class="heart">❤️</span>
+        </p>
+        <p style="text-align: right; margin-top: 15px; font-weight: bold">
+          Seni cox seven oglun
+          <span id="childName" style="color: #ff6b9d">Kenan</span>
+          <span class="emoji-animation" style="font-size: 1.5rem">👩‍👧‍👦</span>
+        </p>
+      </div>
+
+      <h2>Senin dünyanin en yaxsi anasi olmaginin sebebi:</h2>
+      <div class="memory-grid">
+        <!-- HIER DEINE GRÜNDE EINFÜGEN -->
+        <div class="memory-card">
+          <h3><span class="heart">❤️</span>Senin gözel Ruhun</h3>
+          <p>
+            Her ne olursa olsun sen mene hemise gulag asirsan ve mene mental cox
+            kömek eleyirsen. Sen olmasa idin men cox seyleri öz mental gücümnen
+            basara bilmeyecekdim ve özümü de cox zor gelistirecekdim
+          </p>
+          <div style="text-align: right; margin-top: 10px">
+            <span class="emoji-animation" style="font-size: 1.2rem">🤗</span>
+            <span class="emoji-animation" style="font-size: 1.2rem">💝</span>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <h3>
+            <span class="emoji-animation" style="font-size: 1.3rem">😊</span>
+            Senin gözel gülümsemen
+          </h3>
+          <p>
+            Anam senin cox gözel bir gülüsün var allah senin üzündeki bu gülüsü
+            hec vaxt almasin sende, cünki sen bize hemise gülümseyende biz bütün
+            bu heyatin zorluglarini unuduruq ve bizde gülümsüyürük.
+          </p>
+          <div style="text-align: right; margin-top: 10px">
+            <span class="emoji-animation" style="font-size: 1.2rem">✨</span>
+            <span class="emoji-animation" style="font-size: 1.2rem">🌟</span>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <h3>
+            <span class="emoji-animation" style="font-size: 1.3rem">⭐</span>
+            Bizim birlikte gecirdiyimiz vaxtlar
+          </h3>
+          <p>
+            Ister alisveris yada ister seyahet olsun seni hemise yanimizda
+            olmagin bizi cox sevindirir, cünki yere düsmeyimize ragmen bize
+            hemise gülüb ayaga qalxmaga kömek edirsen ve bize mut verirsen.
+          </p>
+          <div style="text-align: right; margin-top: 10px">
+            <span class="emoji-animation" style="font-size: 1.2rem">☕</span>
+            <span class="emoji-animation" style="font-size: 1.2rem">🌳</span>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <h3>
+            <span class="emoji-animation" style="font-size: 1.3rem">💪</span>
+            Senin gücün
+          </h3>
+          <p>
+            Men gücü burda muskul olaraq yox, senin mental ve ruh olaraq güclü
+            bir qadin olmagivi deyirem. Sen menim heyatimda gördüyüm en güclü ve
+            pes elemeyen bir qadinsan ve mende ona göre seni öz Vorbildim olaraq
+            görürem gözel anam meninim hemise bele ol.
+          </p>
+          <div style="text-align: right; margin-top: 10px">
+            <span class="emoji-animation" style="font-size: 1.2rem">🏆</span>
+            <span class="emoji-animation" style="font-size: 1.2rem">👑</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box">
+        <h2>
+          Menim sennen olan en gözel xatirem:
+          <span class="emoji-animation" style="font-size: 1.5rem">📸</span>
+        </h2>
+        <!-- HIER DEINE LIEBLINGSERINNERUNG EINFÜGEN -->
+        <p id="memoryText">
+          Men cox düsündüm ama bele en gözel deyeceyim bir xatirem yoxdu, cünki
+          menim sennen olan bütün xatirelerim gözeldi. Sen mene hemise dayaq
+          olursan ve kömek edirsen. Men cox mutlu bir övladamki sen menim
+          anamsan. Men seni cox sevirem gözel anam.
+          <span
+            class="emoji-animation"
+            style="
+              font-size: 1.2rem;
+              display: block;
+              text-align: center;
+              margin-top: 10px;
+            "
+            >💭 🎞️ 💖</span
+          >
+        </p>
+      </div>
+
+      <footer>
+        <p>
+          Mit all meiner Liebe gemacht
+          <span
+            id="birthdayDate"
+            style="color: #ff6b9d; font-weight: bold"
+          ></span>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #ff6b9d">
+          <span class="emoji-animation" style="font-size: 1rem">🎈</span>
+          Die beste Mama der Welt verdient den schönsten Tag!
+          <span class="emoji-animation" style="font-size: 1rem">🎈</span>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      // EINFACHER FIX FÜR DAS BILD-PROBLEM
+
+      // Warte, bis die Seite vollständig geladen ist
+      document.addEventListener("DOMContentLoaded", function () {
+        const fotoElement = document.getElementById("birthdayPhoto");
+
+        // Falls das Bild nicht lädt, zeige nach 2 Sekunden einen Hinweis
+        setTimeout(function () {
+          if (fotoElement.naturalWidth === 0) {
+            // Bild wurde nicht geladen
+            console.log("Bild nicht gefunden. Bitte Dateinamen überprüfen.");
+          }
+        }, 2000);
+
+        // Automatische Text-Animationen
+        setTimeout(function () {
+          const elements = document.querySelectorAll(
+            ".message-box, .memory-card, h2, p",
+          );
+          elements.forEach((el, index) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+
+            setTimeout(() => {
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+            }, 100 * index);
+          });
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
